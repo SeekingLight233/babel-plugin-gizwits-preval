@@ -11,5 +11,9 @@
   "dependencies": {
     "@babel/core": "^7.19.3",
     "babel-template": "^6.26.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SeekingLight233/babel-plugin-gizwits-preval.git"
   }
 }
