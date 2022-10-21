@@ -1,8 +1,7 @@
 const template = require('babel-template');
+const t = require('@babel/types');
 
 module.exports = function (babel) {
-  let t = babel.type;
-
   const fn = template(`function FUNCNAME(data){FUNCBODY}`);
 
   function replaceScriptStr(node, funcName) {
@@ -25,8 +24,12 @@ module.exports = function (babel) {
     visitor: {
       ObjectExpression: (path, state) => {
         let node = path.node;
-        replaceScriptStr(node, 'input');
-        replaceScriptStr(node, 'output');
+
+        const filename = state?.file?.opts?.filename ?? '';
+        if (filename.includes('taro-renderor/src/pages/mock')) {
+          replaceScriptStr(node, 'input');
+          replaceScriptStr(node, 'output');
+        }
       },
     },
   };
